@@ -1,10 +1,9 @@
 name: n8n_client
 description: A Dart client for interacting with the n8n Public API, built by Spinex IO.
-version: 0.1.0
+version: 0.2.0
 homepage: https://spinex.io
 repository: https://github.com/mskayali/n8n_client
 issue_tracker: https://github.com/spinex-io/n8n_client/issues
-publish_to: https://pub.dev
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

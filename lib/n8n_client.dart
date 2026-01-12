@@ -15,6 +15,33 @@ import 'api/users_api.dart';
 import 'api/variables_api.dart';
 import 'api/workflows_api.dart';
 
+// Export all models
+export 'models/audit.dart';
+export 'models/credential.dart';
+export 'models/execution.dart';
+export 'models/import_result.dart';
+export 'models/pagination.dart';
+export 'models/project.dart';
+export 'models/pull.dart';
+export 'models/tag.dart';
+export 'models/user.dart';
+export 'models/variable.dart';
+export 'models/workflow.dart';
+
+// Export API classes
+export 'api/audit_api.dart';
+export 'api/credentials_api.dart';
+export 'api/executions_api.dart';
+export 'api/projects_api.dart';
+export 'api/source_control_api.dart';
+export 'api/tags_api.dart';
+export 'api/users_api.dart';
+export 'api/variables_api.dart';
+export 'api/workflows_api.dart';
+
+// Export utilities
+export 'utils/api_exception.dart';
+
 class N8NClient {
   final Dio _dio;
   late final AuditApi audit;

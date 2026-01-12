@@ -32,6 +32,27 @@ class CredentialsApi {
     }
   }
 
+  /// Update a credential
+  Future<Response> updateCredential(String id, {
+    String? name,
+    String? type,
+    Map<String, dynamic>? data,
+  }) async {
+    try {
+      final response = await _dio.patch(
+        '/credentials/$id',
+        data: {
+          if (name != null) 'name': name,
+          if (type != null) 'type': type,
+          if (data != null) 'data': data,
+        },
+      );
+      return response;
+    } on DioException catch (e) {
+      throw Exception('Failed to update credential: ${e.message}');
+    }
+  }
+
   /// Get credential type schema by credential type name
   Future<Response> getCredentialType(String credentialTypeName) async {
     try {

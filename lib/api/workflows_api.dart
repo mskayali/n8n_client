@@ -89,11 +89,32 @@ class WorkflowsApi {
     }
   }
 
+  /// Retrieve a specific workflow version
+  Future<Response> getWorkflowVersion(String id, String versionId) async {
+    try {
+      final response = await _dio.get(
+        '/workflows/$id/$versionId',
+      );
+      return response;
+    } on DioException catch (e) {
+      throw Exception('Failed to retrieve workflow version: ${e.message}');
+    }
+  }
+
   /// Activate a workflow
-  Future<Response> activateWorkflow(String id) async {
+  Future<Response> activateWorkflow(String id, {
+    String? versionId,
+    String? name,
+    String? description,
+  }) async {
     try {
       final response = await _dio.post(
         '/workflows/$id/activate',
+        data: {
+          if (versionId != null) 'versionId': versionId,
+          if (name != null) 'name': name,
+          if (description != null) 'description': description,
+        },
       );
       return response;
     } on DioException catch (e) {

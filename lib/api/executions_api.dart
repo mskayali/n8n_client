@@ -35,7 +35,7 @@ class ExecutionsApi {
   }
 
   /// Retrieve a single execution by ID
-  Future<Response> getExecution(int id, {bool? includeData}) async {
+  Future<Response> getExecution(String id, {bool? includeData}) async {
     try {
       final response = await _dio.get(
         '/executions/$id',
@@ -50,7 +50,7 @@ class ExecutionsApi {
   }
 
   /// Delete an execution by ID
-  Future<Response> deleteExecution(int id) async {
+  Future<Response> deleteExecution(String id) async {
     try {
       final response = await _dio.delete(
         '/executions/$id',
@@ -58,6 +58,21 @@ class ExecutionsApi {
       return response;
     } on DioException catch (e) {
       throw Exception('Failed to delete execution: ${e.message}');
+    }
+  }
+
+  /// Retry a failed execution
+  Future<Response> retryExecution(String id, {bool? loadWorkflow}) async {
+    try {
+      final response = await _dio.post(
+        '/executions/$id/retry',
+        data: {
+          if (loadWorkflow != null) 'loadWorkflow': loadWorkflow,
+        },
+      );
+      return response;
+    } on DioException catch (e) {
+      throw Exception('Failed to retry execution: ${e.message}');
     }
   }
 }

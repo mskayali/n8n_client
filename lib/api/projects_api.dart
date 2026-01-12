@@ -60,4 +60,44 @@ class ProjectsApi {
       throw Exception('Failed to delete project: ${e.message}');
     }
   }
+
+  /// Add users to a project
+  Future<Response> addUsersToProject(String projectId, List<Map<String, dynamic>> relations) async {
+    try {
+      final response = await _dio.post(
+        '/projects/$projectId/users',
+        data: relations,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw Exception('Failed to add users to project: ${e.message}');
+    }
+  }
+
+  /// Remove a user from a project
+  Future<Response> removeUserFromProject(String projectId, String userId) async {
+    try {
+      final response = await _dio.delete(
+        '/projects/$projectId/users/$userId',
+      );
+      return response;
+    } on DioException catch (e) {
+      throw Exception('Failed to remove user from project: ${e.message}');
+    }
+  }
+
+  /// Change a user's role in a project
+  Future<Response> changeUserRoleInProject(String projectId, String userId, String role) async {
+    try {
+      final response = await _dio.patch(
+        '/projects/$projectId/users/$userId',
+        data: {
+          'role': role,
+        },
+      );
+      return response;
+    } on DioException catch (e) {
+      throw Exception('Failed to change user role in project: ${e.message}');
+    }
+  }
 }
